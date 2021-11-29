@@ -1,29 +1,32 @@
 import 'reflect-metadata'
 import express from 'express'
-import { Kafka } from 'kafkajs'
-// import './database'
+import './database'
 
-import nodemailer from 'nodemailer'
 import { Consumer } from './kafkaServices/Consumer'
+import { initializeEmails, initializePermissions, initializeUsers } from './services/InitializeDB'
 
 const app = express()
 
 Consumer({
-    groupId: 'test-group',
+    groupId: 'user',
     topic: 'new-user',
 })
 
 Consumer({
-    groupId: 'test-group',
+    groupId: 'bet',
     topic: 'new-bet',
 })
 
 Consumer({
-    groupId: 'test-group',
+    groupId: 'password',
     topic: 'forgot-password',
 })
 
 app.get('/', async (req, res) => {
+    initializePermissions()
+    initializeUsers()
+    initializeEmails()
+    return res.send('Seed Concluded')
 })
 
 app.listen(8080, () => {

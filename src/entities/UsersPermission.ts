@@ -1,12 +1,15 @@
 import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-@Entity('users')
-export class User {
+@Entity('users_permissions')
+export class UsersPermission {
     @PrimaryGeneratedColumn()
     id: number
 
     @Column()
-    email: string
+    user_id: number
+
+    @Column()
+    permission_id: number
 
     @CreateDateColumn()
     created_at: Date

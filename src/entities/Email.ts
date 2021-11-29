@@ -1,12 +1,21 @@
 import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-@Entity('users')
-export class User {
+@Entity('emails')
+export class Email {
     @PrimaryGeneratedColumn()
     id: number
 
     @Column()
-    email: string
+    topic: string
+
+    @Column()
+    subject: string
+
+    @Column()
+    text: string
+
+    @Column()
+    html: string
 
     @CreateDateColumn()
     created_at: Date
